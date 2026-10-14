@@ -31,7 +31,6 @@ DARK_VARS = """
 --sidebar-bg:#0d1526; --sidebar-border:#1e2a44; --title-color:#eef2ff;
 """
 
-
 def load_css():
     """Inject theme variables + base CSS."""
     theme = st.session_state.get("theme", "light")
@@ -45,7 +44,6 @@ def load_css():
         unsafe_allow_html=True,
     )
     st.markdown(f"<style>{base_css}</style>", unsafe_allow_html=True)
-
 
 # ====================== FULLSCREEN SPLASH ======================
 def show_splash_once():
@@ -88,11 +86,13 @@ def show_splash_once():
                         justify-content: center;
                         font-family: 'Inter', sans-serif;
                         animation: asFadeOut 4.2s ease-in-out forwards;
+                        /* CRITICAL FIX: Stop blocking clicks immediately */
+                        pointer-events: none !important;
                     }
                     @keyframes asFadeOut {
                         0%   { opacity: 1; }
                         75%  { opacity: 1; }
-                        100% { opacity: 0; }
+                        100% { opacity: 0; visibility: hidden; display: none; }
                     }
                     #as-fullscreen-splash .as-wrap {
                         display: flex;
@@ -295,7 +295,6 @@ def show_splash_once():
 
     components.html(splash_html, height=1, scrolling=False)
     return True
-
 
 # ====================== CYBER TITLE BAR ======================
 def cyber_title(page_title: str, ticker_items: list, clock_date: str, clock_time: str):
