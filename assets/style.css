@@ -384,5 +384,13 @@ section[data-testid="stSidebar"] [data-testid="stSidebarNav"] li {
     margin: 0 !important;
     padding: 0 !important;
 }
-/* Hide the default Streamlit auto-generated navigation */
-[data-testid="stSidebarNav"] { display: none !important; }
+
+/* =========================================================
+   SAFETY NET: Prevent invisible overlays from blocking clicks
+   ========================================================= */
+#as-fullscreen-splash {
+    pointer-events: none !important;
+}
+[data-testid="stAppViewContainer"] > div:first-child > iframe {
+    pointer-events: none !important;
+}
